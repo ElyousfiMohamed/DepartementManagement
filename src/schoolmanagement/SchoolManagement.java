@@ -4,47 +4,33 @@
  */
 package schoolmanagement;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import SchoolManagementIMetier.IMetier;
+import SchoolManagementIMetier.IMetierImpt;
+import java.util.List;
+import persistantClasse.Departement;
+import persistantClasse.Professeur;
 
 /**
  *
  * @author ELYOUSFI
  */
-public class SchoolManagement extends Application {
+public class SchoolManagement {
     
-    @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        launch(args);
+        IMetier metier=new IMetierImpt();
+        
+        Departement d1=new Departement(1,"math info");
+        Departement d2=new Departement(2,"electrique");
+        metier.addDepartement(d1);
+        metier.addDepartement(d2);
+        
+        Professeur p1=new Professeur(1,"ELYOUSFI","Mohamed","G41384","N487 bloc W media","mail@mail.mail","0789756564","08/08/2018");
+        Professeur p2=new Professeur(2,"ELYOUSFI","Oussama","G78785","N47 bloc S media","mail1@mail1.mail1","0889775864","09/09/2009");
+        p1.setDepartement(d2);
+        p2.setDepartement(d1);
+        metier.addProfesseur(p1);
+        metier.addProfesseur(p2);
+        
     }
     
 }

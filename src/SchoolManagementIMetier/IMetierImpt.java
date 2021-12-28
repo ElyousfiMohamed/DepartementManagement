@@ -24,7 +24,7 @@ public class IMetierImpt implements IMetier {
     public void addProfesseur(Professeur p) {
         Connection conn = SingletonConnexionDB.getConnection();
         try {
-            PreparedStatement pstn = conn.prepareStatement("INSERT INTO professeur(ID_DEPART,NOM_PROF,PRENOM_PROF,CIN,ADRESSE,EMAIL,TELEPHONE,DATE_RECRUTEMENT) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement pstn = conn.prepareStatement("INSERT INTO professeur(ID_DEPART,NOM_PROF,PRENOM_PROF,CIN,ADRESSE,EMAIL,TELEPHONE,DATE_RECRUTEMENT) VALUES (?,?,?,?,?,?,?,?)");
             pstn.setInt(1, p.getDepartement().getId());
             pstn.setString(2, p.getNom());
             pstn.setString(3, p.getPrenom());
@@ -60,7 +60,7 @@ public class IMetierImpt implements IMetier {
     public void addDepartement(Departement d) {
         Connection conn = SingletonConnexionDB.getConnection();
         try {
-            PreparedStatement pstn = conn.prepareStatement("INSERT INTO departement(NOM_DEPARTE) VALUES (?)");
+            PreparedStatement pstn = conn.prepareStatement("INSERT INTO departement (NOM_DEPART) VALUES (?)");
             pstn.setString(1, d.getNom());
             pstn.executeUpdate();
         } catch (Exception e) {
