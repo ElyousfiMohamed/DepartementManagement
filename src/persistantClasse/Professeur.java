@@ -12,33 +12,32 @@ import java.util.Date;
  */
 public class Professeur {
     private int id;
-    private String nome;
+    private String nom;
     private String prenom;
     private String cin;
     private String adresse;
     private String email;
     private String telephone;
-    private Date date_recrutement;
+    private String date_recrutement;
     private Departement departement;
 
-    public Professeur(int id, String nome, String prenom, String cin, String adresse, String email, String telephone, Date date_recrutement, Departement departement) {
+    public Professeur(int id, String nom, String prenom, String cin, String adresse, String email, String telephone, String date_recrutement) {
         this.id = id;
-        this.nome = nome;
+        this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
         this.adresse = adresse;
         this.email = email;
         this.telephone = telephone;
         this.date_recrutement = date_recrutement;
-        this.departement = departement;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNom() {
+        return nom;
     }
 
     public String getPrenom() {
@@ -61,7 +60,7 @@ public class Professeur {
         return telephone;
     }
 
-    public Date getDate_recrutement() {
+    public String getDate_recrutement() {
         return date_recrutement;
     }
 
@@ -73,8 +72,8 @@ public class Professeur {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public void setPrenom(String prenom) {
@@ -97,7 +96,7 @@ public class Professeur {
         this.telephone = telephone;
     }
 
-    public void setDate_recrutement(Date date_recrutement) {
+    public void setDate_recrutement(String date_recrutement) {
         this.date_recrutement = date_recrutement;
     }
 
@@ -107,7 +106,7 @@ public class Professeur {
 
     @Override
     public String toString() {
-        return "Proffeseur{" + "id=" + id + ", nome=" + nome + ", prenom=" + prenom + ", cin=" + cin + ", adresse=" + adresse + ", email=" + email + ", telephone=" + telephone + ", date_recrutement=" + date_recrutement + "}";
+        return "Proffeseur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", cin=" + cin + ", adresse=" + adresse + ", email=" + email + ", telephone=" + telephone + ", date_recrutement=" + date_recrutement + "}";
     }
     
     

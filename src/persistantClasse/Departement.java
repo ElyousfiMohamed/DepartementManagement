@@ -4,6 +4,7 @@
  */
 package persistantClasse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,12 @@ public class Departement {
     private String nom;
     private List<Professeur> professeurs;
 
-    public Departement(int id, String nom, List<Professeur> professeurs) {
+    public Departement() {}
+    
+    public Departement(int id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.professeurs = professeurs;
+        this.professeurs = new ArrayList<Professeur>();
     }
 
     public int getId() {

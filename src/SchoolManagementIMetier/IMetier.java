@@ -14,11 +14,9 @@ import persistantClasse.Professeur;
  */
 public interface IMetier {
     void addProfesseur(Professeur c);
-    void delProfesseur(Professeur c);
     List<Professeur> getAllProfesseurs();
-    void addProfToDepart();
     
     void addDepartement(Departement c);
-    void delDepartement(Departement c);
     List<Departement> getAllDepartements();
+    Departement getDepartementById(int id);
 }
