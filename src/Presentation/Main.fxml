@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.MainController">
+    <stylesheets>
+        <URL value="@main.css" />
+    </stylesheets>
+       <children>
+        <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #212121; -fx-border-width: 10;" stylesheets="@main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <left>
+                <Button fx:id="profs" mnemonicParsing="false" onAction="#showProfs" scaleX="2.0" scaleY="2.0" styleClass="prof" text="Professeurs" textFill="WHITE" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets left="150.0" />
+                    </BorderPane.margin>
+                </Button>
+            </left>
+            <right>
+                <Button fx:id="departs" mnemonicParsing="false" onAction="#showDeparts" scaleX="2.0" scaleY="2.0" styleClass="depart" text="Departements" textFill="WHITE" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="150.0" />
+                    </BorderPane.margin>
+                </Button>
+            </right>
+        </BorderPane>
+    </children>
+</AnchorPane>
