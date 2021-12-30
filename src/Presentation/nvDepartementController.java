@@ -5,9 +5,9 @@
 package presentation;
 
 import Presentation.DepartementController;
+import SchoolManagementIMetier.IMetier;
+import SchoolManagementIMetier.IMetierImpt;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import persistantClasse.Professeur;
-import SchoolManagementIMetier.*;
 import persistantClasse.Departement;
 
 /**
@@ -25,7 +23,7 @@ import persistantClasse.Departement;
  *
  * @author ELYOUSFI
  */
-public class nvProfesseurController implements Initializable {
+public class nvDepartementController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
@@ -35,21 +33,6 @@ public class nvProfesseurController implements Initializable {
     private Button cancel;
     @FXML
     private TextField nom;
-    @FXML
-    private TextField prenom;
-    @FXML
-    private TextField adresse;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField tel;
-    private TextField fonction;
-    @FXML
-    private TextField cin;
-    @FXML
-    private TextField date;
-    @FXML
-    private TextField idDepart;
 
     /**
      * Initializes the controller class.
@@ -63,10 +46,8 @@ public class nvProfesseurController implements Initializable {
     private void save(ActionEvent event) {
         try {
             IMetier metier = new IMetierImpt();
-            Professeur p = new Professeur(this.nom.getText(), this.prenom.getText(), this.cin.getText(), this.adresse.getText(), this.email.getText(), this.tel.getText(),this.date.getText());
-            if(!this.idDepart.getText().equals(""))
-                p.setDepartement(metier.getDepartementById(Integer.parseInt(this.idDepart.getText())));
-            metier.addProfesseur(p);
+            Departement d = new Departement(this.nom.getText());
+            metier.addDepartement(d);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -77,5 +58,7 @@ public class nvProfesseurController implements Initializable {
         Stage stage = (Stage)rootPane.getScene().getWindow();
         stage.close();
     }
+    
+    
     
 }

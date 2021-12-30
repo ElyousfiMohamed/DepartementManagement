@@ -8,6 +8,8 @@
 
 Button {
     -fx-background-color:#212121;
+    -fx-border-color: #212121;
+    -fx-border-radius: 5px
 }
 
 Button:hover {

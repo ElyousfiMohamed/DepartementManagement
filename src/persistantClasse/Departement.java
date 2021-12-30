@@ -18,7 +18,12 @@ public class Departement {
 
     public Departement() {}
     
-    public Departement(int id, String nom) {
+    public Departement(String nom) {
+        this.nom = nom;
+        this.professeurs = new ArrayList<Professeur>();
+    }
+    
+    public Departement(int id,String nom) {
         this.id = id;
         this.nom = nom;
         this.professeurs = new ArrayList<Professeur>();

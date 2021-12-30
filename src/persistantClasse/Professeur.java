@@ -21,7 +21,17 @@ public class Professeur {
     private String date_recrutement;
     private Departement departement;
 
-    public Professeur(int id, String nom, String prenom, String cin, String adresse, String email, String telephone, String date_recrutement) {
+    public Professeur(String nom, String prenom, String cin, String adresse, String email, String telephone, String date_recrutement) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cin = cin;
+        this.adresse = adresse;
+        this.email = email;
+        this.telephone = telephone;
+        this.date_recrutement = date_recrutement;
+    }
+    
+     public Professeur(int id,String nom, String prenom, String cin, String adresse, String email, String telephone, String date_recrutement) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -31,6 +41,7 @@ public class Professeur {
         this.telephone = telephone;
         this.date_recrutement = date_recrutement;
     }
+
 
     public int getId() {
         return id;
@@ -106,7 +117,7 @@ public class Professeur {
 
     @Override
     public String toString() {
-        return "Proffeseur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", cin=" + cin + ", adresse=" + adresse + ", email=" + email + ", telephone=" + telephone + ", date_recrutement=" + date_recrutement + "}";
+        return "Professeur{nom=" + nom + ", prenom=" + prenom + ", cin=" + cin + ", adresse=" + adresse + ", email=" + email + ", telephone=" + telephone + ", date_recrutement=" + date_recrutement + "}";
     }
     
     
