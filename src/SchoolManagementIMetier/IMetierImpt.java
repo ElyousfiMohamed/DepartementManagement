@@ -22,6 +22,8 @@ import javafx.scene.input.KeyEvent;
  */
 public class IMetierImpt implements IMetier {
 
+    public static Professeur professeur;
+    
     @Override
     public void addProfesseur(Professeur p) {
         Connection conn = SingletonConnexionDB.getConnection();

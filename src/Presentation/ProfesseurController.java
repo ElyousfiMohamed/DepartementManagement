@@ -136,6 +136,27 @@ public class ProfesseurController implements Initializable {
 
     @FXML
     private void updateProf(ActionEvent event) {
+        int indice = tableView.getSelectionModel().getSelectedIndex();
+        if (indice >= 0) {
+            try {
+                IMetierImpt.professeur =  tableView.getItems().get(indice);
+                
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("modifProf.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("modifier professeur");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Veuillez sélectionner un élément ");
+            alert.show();
+        }
     }
 
     @FXML
