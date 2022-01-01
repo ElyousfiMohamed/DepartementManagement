@@ -108,11 +108,79 @@ public class DepartementController implements Initializable {
 
     @FXML
     private void updateDepart(ActionEvent event) {
+        int indice = tableView.getSelectionModel().getSelectedIndex();
+        if (indice >= 0) {
+            try {
+                IMetierImpt.departement = tableView.getItems().get(indice);
+
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("modifDepart.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("modifier departement");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent e) {
+                        tableView.getItems().clear();
+                        IMetier metier = new IMetierImpt();
+                        departements.addAll(metier.getAllDepartements());
+                        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                        tableView.setItems(departements);
+                    }
+                });
+            } catch (Exception ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText(ex.getMessage());
+                alert.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Veuillez sélectionner un élément ");
+            alert.show();
+        }
     }
 
 
     @FXML
     private void profsRelatedShow(ActionEvent event) {
+        int indice = tableView.getSelectionModel().getSelectedIndex();
+        if (indice >= 0) {
+            try {
+                IMetierImpt.departement = tableView.getItems().get(indice);
+
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("professeursRelated.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Professeurs");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent e) {
+                        tableView.getItems().clear();
+                        IMetier metier = new IMetierImpt();
+                        departements.addAll(metier.getAllDepartements());
+                        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                        tableView.setItems(departements);
+                    }
+                });
+            } catch (Exception ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText(ex.getMessage());
+                alert.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Veuillez sélectionner un élément ");
+            alert.show();
+        }
     }
 
     @FXML

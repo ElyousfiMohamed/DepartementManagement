@@ -23,17 +23,19 @@ import javafx.scene.input.KeyEvent;
 public class IMetierImpt implements IMetier {
 
     public static Professeur professeur;
-    
+    public static Departement departement;
+
     @Override
     public void addProfesseur(Professeur p) {
         Connection conn = SingletonConnexionDB.getConnection();
         try {
             Statement pstn = conn.createStatement();
             int id;
-            if(p.getDepartement() == null) 
-                id=0;
-            else
+            if (p.getDepartement() == null) {
+                id = 0;
+            } else {
                 id = p.getDepartement().getId();
+            }
             pstn.executeUpdate("INSERT INTO professeur(ID_DEPART,NOM_PROF,PRENOM_PROF,CIN,ADRESSE,EMAIL,TELEPHONE,DATE_RECRUTEMENT) VALUES "
                     + "(" + id + ",'"
                     + p.getNom() + "','"
@@ -66,7 +68,9 @@ public class IMetierImpt implements IMetier {
                 professeurs.add(p);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
         return professeurs;
     }
@@ -105,7 +109,9 @@ public class IMetierImpt implements IMetier {
                 departements.add(d);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
         return departements;
     }
@@ -120,14 +126,12 @@ public class IMetierImpt implements IMetier {
             if (rs.next()) {
                 d.setId(rs.getInt("ID_DEPART"));
                 d.setNom(rs.getString("NOM_DEPART"));
-            } /*else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Pas de departement avec id = " + id);
-                alert.show();
-            }*/
+            }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
         return d;
     }
@@ -137,46 +141,52 @@ public class IMetierImpt implements IMetier {
         try {
             Connection conn = SingletonConnexionDB.getConnection();
             Statement st = conn.createStatement();
-            st.executeUpdate("DELETE FROM Professeur WHERE ID_PROF="+id);
+            st.executeUpdate("DELETE FROM Professeur WHERE ID_PROF=" + id);
         } catch (Exception e) {
         }
     }
-    
+
     @Override
     public void delDepartement(int id) {
         try {
             Connection conn = SingletonConnexionDB.getConnection();
             Statement st = conn.createStatement();
-            st.executeUpdate("DELETE FROM Departement WHERE ID_DEPART="+id);
+            st.executeUpdate("DELETE FROM Departement WHERE ID_DEPART=" + id);
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
     }
+
     @Override
     public List<Professeur> searchProf(String keyWord) {
         List<Professeur> professeurs = new ArrayList<>();
         try {
             Connection connx = SingletonConnexionDB.getConnection();
             Statement stm = connx.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM professeur WHERE NOM_PROF LIKE '%"+keyWord+"%'");
+            ResultSet rs = stm.executeQuery("SELECT * FROM professeur WHERE NOM_PROF LIKE '%" + keyWord + "%'");
             while (rs.next()) {
                 Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 p.setDepartement(getDepartementById(rs.getInt("ID_DEPART")));
                 professeurs.add(p);
             }
-            
+
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(ex.getMessage());
+            alert.show();
         }
         return professeurs;
     }
-    
+
     @Override
     public List<Departement> searchDep(String keyWord) {
         List<Departement> departements = new ArrayList<>();
         try {
             Connection connx = SingletonConnexionDB.getConnection();
             Statement stm = connx.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM departement WHERE NOM_DEPART LIKE '%"+keyWord+"%'");
+            ResultSet rs = stm.executeQuery("SELECT * FROM departement WHERE NOM_DEPART LIKE '%" + keyWord + "%'");
             while (rs.next()) {
                 Departement d = new Departement(rs.getInt(1), rs.getString(2));
                 for (Professeur p : getAllProfesseurs()) {
@@ -186,9 +196,11 @@ public class IMetierImpt implements IMetier {
                 }
                 departements.add(d);
             }
-            
+
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(ex.getMessage());
+            alert.show();
         }
         return departements;
     }
@@ -198,11 +210,12 @@ public class IMetierImpt implements IMetier {
         try {
             Statement pstn = conn.createStatement();
             int id;
-            if(professeur.getDepartement() == null) 
-                id=0;
-            else
+            if (professeur.getDepartement() == null) {
+                id = 0;
+            } else {
                 id = professeur.getDepartement().getId();
-                        
+            }
+
             pstn.executeUpdate("UPDATE professeur SET "
                     + "ID_DEPART = " + id + ",NOM_PROF = '"
                     + professeur.getNom() + "',PRENOM_PROF = '"
@@ -211,7 +224,7 @@ public class IMetierImpt implements IMetier {
                     + professeur.getAdresse() + "',EMAIL = '"
                     + professeur.getEmail() + "',TELEPHONE = '"
                     + professeur.getTelephone() + "',DATE_RECRUTEMENT = '"
-                    + professeur.getDate_recrutement() + "' WHERE ID_PROF = "+professeur.getId());
+                    + professeur.getDate_recrutement() + "' WHERE ID_PROF = " + professeur.getId());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("Professeur modifié avec succés");
             alert.show();
@@ -223,7 +236,39 @@ public class IMetierImpt implements IMetier {
     }
 
     public static void updateDepartement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = SingletonConnexionDB.getConnection();
+        try {
+            Statement pstn = conn.createStatement();
+            pstn.executeUpdate("UPDATE departement SET NOM_DEPART = '"
+                    + departement.getNom() + "' WHERE ID_DEPART = " + departement.getId());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Departement modifié avec succés");
+            alert.show();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
+    }
+
+    @Override
+    public List<Professeur> getProfesseursByDepart(int id) {
+        List<Professeur> professeurs = new ArrayList<>();
+        try {
+            Connection conn = SingletonConnexionDB.getConnection();
+            PreparedStatement pstn = conn.prepareStatement("SELECT * FROM professeur WHERE ID_DEPART = "+id);
+            ResultSet rs = pstn.executeQuery();
+            while (rs.next()) {
+                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                p.setDepartement(getDepartementById(rs.getInt("ID_DEPART")));
+                professeurs.add(p);
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
+        return professeurs;
     }
 
 }

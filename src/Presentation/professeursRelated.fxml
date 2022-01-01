@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="886.0" style="-fx-border-color: #212121; -fx-border-width: 10;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.ProfesseursRelatedController">
+    <stylesheets>
+        <URL value="@main.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="tableView" layoutX="32.0" layoutY="36.0" prefHeight="330.0" prefWidth="822.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="65.0" text="ID" />
+          <TableColumn fx:id="nom" prefWidth="65.0" text="NOM" />
+          <TableColumn fx:id="prenom" prefWidth="74.0" text="PRENOM" />
+            <TableColumn fx:id="cin" prefWidth="64.0" text="CIN" />
+            <TableColumn fx:id="adresse" prefWidth="154.0" text="ADRESSE" />
+            <TableColumn fx:id="email" minWidth="6.0" prefWidth="119.0" text="EMAIL" />
+            <TableColumn fx:id="telephone" minWidth="0.0" prefWidth="121.0" text="TELEPHONE" />
+            <TableColumn fx:id="date" minWidth="0.0" prefWidth="159.0" text="DATE RECRUTEMENT" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

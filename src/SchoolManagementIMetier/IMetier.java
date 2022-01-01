@@ -17,6 +17,8 @@ public interface IMetier {
     void addProfesseur(Professeur p);
 
     List<Professeur> getAllProfesseurs();
+    
+    List<Professeur> getProfesseursByDepart(int id);
 
     void delProfesseur(int id);
 
