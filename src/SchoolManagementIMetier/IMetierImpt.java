@@ -193,4 +193,37 @@ public class IMetierImpt implements IMetier {
         return departements;
     }
 
+    public static void updateProfesseur() {
+        Connection conn = SingletonConnexionDB.getConnection();
+        try {
+            Statement pstn = conn.createStatement();
+            int id;
+            if(professeur.getDepartement() == null) 
+                id=0;
+            else
+                id = professeur.getDepartement().getId();
+                        
+            pstn.executeUpdate("UPDATE professeur SET "
+                    + "ID_DEPART = " + id + ",NOM_PROF = '"
+                    + professeur.getNom() + "',PRENOM_PROF = '"
+                    + professeur.getPrenom() + "',CIN = '"
+                    + professeur.getCin() + "',ADRESSE = '"
+                    + professeur.getAdresse() + "',EMAIL = '"
+                    + professeur.getEmail() + "',TELEPHONE = '"
+                    + professeur.getTelephone() + "',DATE_RECRUTEMENT = '"
+                    + professeur.getDate_recrutement() + "' WHERE ID_PROF = "+professeur.getId());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Professeur modifié avec succés");
+            alert.show();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
+    }
+
+    public static void updateDepartement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

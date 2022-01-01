@@ -27,12 +27,12 @@
                         <Insets left="40.0" />
                     </GridPane.margin>
                 </Label>
-                <Button id="save" fx:id="save" mnemonicParsing="false" onAction="#save" prefHeight="72.0" prefWidth="177.0" text="SAVE" textFill="WHITE" GridPane.rowIndex="2">
+                <Button id="save" fx:id="save" mnemonicParsing="false" onAction="#save" prefHeight="72.0" prefWidth="177.0" text="SAUVEGARDER" textFill="WHITE" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                     </GridPane.margin>
                 </Button>
-                <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="72.0" prefWidth="177.0" text="CANCEL" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="72.0" prefWidth="177.0" text="ANNULER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                     </GridPane.margin>

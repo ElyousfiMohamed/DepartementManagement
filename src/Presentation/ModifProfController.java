@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +26,7 @@ import persistantClasse.Professeur;
 public class ModifProfController implements Initializable {
 
     @FXML
-    private AnchorPane rootPane;
+    private AnchorPane rootPane2;
     @FXML
     private Button save;
     @FXML
@@ -61,26 +62,34 @@ public class ModifProfController implements Initializable {
         this.tel.setText(IMetierImpt.professeur.getTelephone());
         this.date.setText(IMetierImpt.professeur.getDate_recrutement());
         this.idDepart.setText(String.valueOf(IMetierImpt.professeur.getDepartement().getId()));
-    }    
+    }
 
     @FXML
     private void save(ActionEvent event) {
-         try {
+        try {
             IMetier metier = new IMetierImpt();
-            metier.delProfesseur(IMetierImpt.professeur.getId());
-            Professeur p = new Professeur(this.nom.getText(), this.prenom.getText(), this.cin.getText(), this.adresse.getText(), this.email.getText(), this.tel.getText(),this.date.getText());
-            if(!this.idDepart.getText().equals(""))
-                p.setDepartement(metier.getDepartementById(Integer.parseInt(this.idDepart.getText())));
-            metier.addProfesseur(p);
+            IMetierImpt.professeur.setNom(this.nom.getText());
+            IMetierImpt.professeur.setPrenom(this.prenom.getText());
+            IMetierImpt.professeur.setCin(this.cin.getText());
+            IMetierImpt.professeur.setAdresse(this.adresse.getText());
+            IMetierImpt.professeur.setEmail(this.email.getText());
+            IMetierImpt.professeur.setTelephone(this.tel.getText());
+            IMetierImpt.professeur.setDate_recrutement(this.date.getText());
+            if (!this.idDepart.getText().equals("")) {
+                IMetierImpt.professeur.setDepartement(metier.getDepartementById(Integer.parseInt(this.idDepart.getText())));
+            }
+            IMetierImpt.updateProfesseur();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(ex.getMessage());
+            alert.show();
         }
     }
 
     @FXML
     private void cancel(ActionEvent event) {
-        Stage stage = (Stage)rootPane.getScene().getWindow();
+        Stage stage = (Stage) rootPane2.getScene().getWindow();
         stage.close();
     }
-    
+
 }

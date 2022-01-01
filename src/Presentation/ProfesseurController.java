@@ -112,7 +112,9 @@ public class ProfesseurController implements Initializable {
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
     }
 
@@ -139,8 +141,8 @@ public class ProfesseurController implements Initializable {
         int indice = tableView.getSelectionModel().getSelectedIndex();
         if (indice >= 0) {
             try {
-                IMetierImpt.professeur =  tableView.getItems().get(indice);
-                
+                IMetierImpt.professeur = tableView.getItems().get(indice);
+
                 Stage stage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("modifProf.fxml"));
 
@@ -149,8 +151,27 @@ public class ProfesseurController implements Initializable {
                 stage.setTitle("modifier professeur");
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.show();
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent e) {
+                        tableView.getItems().clear();
+                        IMetier metier = new IMetierImpt();
+                        professeurs.addAll(metier.getAllProfesseurs());
+                        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                        prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+                        cin.setCellValueFactory(new PropertyValueFactory<>("cin"));
+                        adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+                        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+                        telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+                        date.setCellValueFactory(new PropertyValueFactory<>("date_recrutement"));
+                        tableView.setItems(professeurs);
+                    }
+                });
             } catch (Exception ex) {
-                ex.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText(ex.getMessage());
+                alert.show();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -161,13 +182,37 @@ public class ProfesseurController implements Initializable {
 
     @FXML
     private void afctDprt(ActionEvent event) {
+        int indice = tableView.getSelectionModel().getSelectedIndex();
+        if (indice >= 0) {
+            IMetierImpt.professeur = tableView.getItems().get(indice);
+            try {
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("afctToDepart.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Affecter au departement");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText(e.getMessage());
+                alert.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Veuillez sélectionner un élément ");
+            alert.show();
+
+        }
     }
 
     @FXML
-    private void searchProf(KeyEvent event) {
+    private void searchProf(KeyEvent event
+    ) {
         String keyWord = search.getText();
         tableView.getItems().clear();
-        
+
         IMetier m = new IMetierImpt();
         professeurs.addAll(m.searchProf(keyWord));
         tableView.setItems(professeurs);

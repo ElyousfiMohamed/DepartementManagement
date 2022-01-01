@@ -13,16 +13,23 @@ import persistantClasse.Professeur;
  * @author ELYOUSFI
  */
 public interface IMetier {
-    void addProfesseur(Professeur c);
+
+    void addProfesseur(Professeur p);
+
     List<Professeur> getAllProfesseurs();
+
     void delProfesseur(int id);
+
     List<Professeur> searchProf(String keyWord);
-    
-    void addDepartement(Departement c);
+
+    void addDepartement(Departement d);
+
     List<Departement> getAllDepartements();
+
     Departement getDepartementById(int id);
+
     void delDepartement(int id);
+
     List<Departement> searchDep(String keyWord);
 
-    
 }
