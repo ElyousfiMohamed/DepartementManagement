@@ -63,7 +63,8 @@ public class IMetierImpt implements IMetier {
             PreparedStatement pstn = conn.prepareStatement("SELECT * FROM professeur");
             ResultSet rs = pstn.executeQuery();
             while (rs.next()) {
-                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 
+                                              rs.getString(7), rs.getString(8), rs.getString(9));
                 p.setDepartement(getDepartementById(rs.getInt("ID_DEPART")));
                 professeurs.add(p);
             }
@@ -142,7 +143,13 @@ public class IMetierImpt implements IMetier {
             Connection conn = SingletonConnexionDB.getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("DELETE FROM Professeur WHERE ID_PROF=" + id);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Professeur supprimé avec succés");
+            alert.show();
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();
         }
     }
 
@@ -152,6 +159,9 @@ public class IMetierImpt implements IMetier {
             Connection conn = SingletonConnexionDB.getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("DELETE FROM Departement WHERE ID_DEPART=" + id);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Departement supprimé avec succés");
+            alert.show();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(e.getMessage());
@@ -167,7 +177,8 @@ public class IMetierImpt implements IMetier {
             Statement stm = connx.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM professeur WHERE NOM_PROF LIKE '%" + keyWord + "%'");
             while (rs.next()) {
-                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 
+                                              rs.getString(7), rs.getString(8), rs.getString(9));
                 p.setDepartement(getDepartementById(rs.getInt("ID_DEPART")));
                 professeurs.add(p);
             }
@@ -259,7 +270,8 @@ public class IMetierImpt implements IMetier {
             PreparedStatement pstn = conn.prepareStatement("SELECT * FROM professeur WHERE ID_DEPART = "+id);
             ResultSet rs = pstn.executeQuery();
             while (rs.next()) {
-                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Professeur p = new Professeur(rs.getInt("ID_PROF"), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 
+                                              rs.getString(7), rs.getString(8), rs.getString(9));
                 p.setDepartement(getDepartementById(rs.getInt("ID_DEPART")));
                 professeurs.add(p);
             }

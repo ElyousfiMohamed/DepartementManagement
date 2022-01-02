@@ -52,7 +52,7 @@ public class ProfesseursRelatedController implements Initializable {
         // TODO
         IMetier metier = new IMetierImpt();
 
-        professeurs.addAll(metier.getProfesseursByDepart(IMetierImpt.departement.getId()));
+        professeurs.addAll(IMetierImpt.departement.getProfesseurs());
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
